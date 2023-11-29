@@ -5,7 +5,7 @@ class PostSerial(serializers.ModelSerializer):
     lookup_field = 'post' 
     class Meta:
         model = Post
-        fields=("creator","topic","name","body","updated","created","id",)
+        fields=("creator","topic","name","body","updated","created",)
 
 class TopicSerial(serializers.HyperlinkedModelSerializer):
     class Meta:

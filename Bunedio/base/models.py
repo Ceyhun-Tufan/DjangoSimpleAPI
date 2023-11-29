@@ -17,8 +17,7 @@ class Post(models.Model):
     body = models.TextField(null=False,blank=False,default="")
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-
+    # deleted id due to unneeded usage
     def __str__(self) -> str:
         return self.name
 
@@ -28,7 +27,6 @@ class Comment(models.Model):
     body = models.TextField()
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     def __str__(self) -> str:
         return self.body[0:50]
