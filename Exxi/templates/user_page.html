@@ -1,0 +1,21 @@
+{%extends 'main_temp.html'%}
+{%block content%}
+
+
+{%for content in contents%}
+
+
+<div class="userpage_post_content"style="padding: 10px;">
+    <div>
+        <a href="{%url 'content' content.id%}">{{content.name}}</a>
+    </div>
+    <div>
+        {{content.body}}
+    </div>
+</div>
+
+{%endfor%}
+
+
+{%endblock%}
+

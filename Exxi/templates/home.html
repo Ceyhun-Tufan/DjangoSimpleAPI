@@ -1,0 +1,20 @@
+{%extends 'main_temp.html'%}
+{%block content%}
+<div>
+    <div>
+        {%for content in contents%}
+        <div>
+            <div>
+                <a href="{%url 'content' content.id%}">{{content.name}}</a>
+            </div>
+                <span
+                >by @<a href="{%url 'user' content.creator.id%}">{{content.creator}}</a>
+                </span>
+                <!-- <a href="/content/{{content.id}}">{{content.name}}</a> yerine bunu -->
+                <!-- bunu kullanmamızın sebebi django ile dinamik bir yapıda olmasından -->
+        </div>
+        <hr>
+        {%endfor%}
+    </div>
+</div>
+{%endblock%}
