@@ -2,27 +2,30 @@ from django.shortcuts import render
 from .serializers import CommentSerial,PostSerial,TopicSerial
 from .models import Comment,Topic,Post
 from rest_framework import viewsets
+from django.http import JsonResponse
 
-# Ana Sayfa -> Son Kişilerin yazıları
+# topiclerin sayfası
 
-def home_view(requests):
-    contents = Post.objects.all()
-    content = {"contents":contents}
-    return render(requests,"home.html",content)
+def topic_view(requests):
+    content = Topic.objects.all()
+    return JsonResponse({"contents":list(content.values())})
+
+def posts_on_topic(requests,tp):
+    topic = Topic.objects.get(id=tp)
+    content = Post.objects.all().filter(topic=topic)
+    return JsonResponse({"contents":list(content.values())})
 
 # Yazıların sayfas -> yazan kişi ve content
 
 def content_view(requests,ck):
     content = Post.objects.get(id=ck)
-    return render(requests,"content_page.html",{"content":content})
+    return JsonResponse({"contents":list(content)})
 
 # Kişiler -> Kendilerine ait yazılar
 
 def user_view(requests,uk):
-    content = {"contents":Post.objects.all().filter(creator=uk)
-               }
-    return render(requests,"user_page.html",content)
-
+    content = Post.objects.all().filter(creator=uk)
+    return JsonResponse({"contents":list(content.values())})
 
 
 # REST FRAMEWORK
@@ -37,3 +40,5 @@ class CommentView(viewsets.ModelViewSet):
 class TopicView(viewsets.ModelViewSet):
     queryset = Topic.objects.all()
     serializer_class = TopicSerial
+
+
