@@ -5,7 +5,7 @@ class PostSerial(serializers.ModelSerializer):
     lookup_field = 'post' 
     class Meta:
         model = Post
-        fields=("creator","topic","name","body","updated","created","likes",)
+        fields=("id","creator","topic","name","body","updated","created","likes",)
 
 class TopicSerial(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -16,3 +16,8 @@ class CommentSerial(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields="__all__"
+
+# class PostsOnTopicSerial(serializers.ModelSerializer):
+#     class Meta:
+#         model = Post
+#         fields = '__all__'
